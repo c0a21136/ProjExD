@@ -5,6 +5,9 @@ answer = 5
 b = 10
 c = 2
 
+#def main():
+    #answer=()を下記に修正
+
 def main():
     for xyz in range(answer):
         m = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
