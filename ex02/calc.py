@@ -5,7 +5,7 @@ import tkinter.messagebox as tkm
 def main():
     def button_click(event):
         btn = event.widget
-        txt = btn["text"]
+        txt = btn["text"] #四則演算を追加します
         if txt == "+":
             entry.insert(tk.END, "+")
         elif txt == "-":
@@ -53,7 +53,7 @@ def main():
              c += 1
         button.grid(row=r, column=c)
         button.bind("<1>", button_click)
-        
+    #プラスボタンの追加
     plus_button = tk.Button(root,
                         width=4,
                         height=2,
@@ -62,7 +62,7 @@ def main():
                         )
     plus_button.grid(row=5, column=1)
     plus_button.bind("<1>", button_click)
-
+    #マイナスボタンの追加
     minus_button = tk.Button(root,
                         width=4,
                         height=2,
@@ -71,7 +71,7 @@ def main():
                         )
     minus_button.grid(row=2, column=3)
     minus_button.bind("<1>", button_click)
-
+    #×ボタンのついか
     k_button = tk.Button(root,
                         width=4,
                         height=2,
@@ -80,7 +80,7 @@ def main():
                         )
     k_button.grid(row=3, column=3)
     k_button.bind("<1>", button_click)
-
+    #÷ボタンの追加
     w_button = tk.Button(root,
                         width=4,
                         height=2,
@@ -89,7 +89,7 @@ def main():
                         )
     w_button.grid(row=4, column=3)
     w_button.bind("<1>", button_click)
-
+    #イコールボタンの追加
     equal_button = tk.Button(root,
                         width=4,
                         height=2,
