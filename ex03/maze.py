@@ -1,5 +1,8 @@
 import tkinter as tk
 import maze_maker as mm
+import tkinter.messagebox as tkm
+import random
+random.randint
 
 def key_down(event):
     global key
@@ -16,7 +19,8 @@ def main_proc():
            "Up":[0,-1],
             "Down":[0, +1],
            "Left":[-1, 0],
-          "Right":[+1, 0]}
+          "Right":[+1, 0],
+          }
     #キー：押されているキーkey/値：移動幅リスト
     #cx, cy = cx+delta[key][0], cy+delta[key][1]
     #canvas.coords("tori", cx, cy)
@@ -32,8 +36,11 @@ def main_proc():
     #if key == "Right"and maze_bg[my][mx+1]==0: mx += 1
     cx, cy = mx*100+50, my*100+50
     canvas.coords("tori", cx, cy)
-    root.after(100, main_proc)
+    if mx==gx and my==gy:
+        tkm.showinfo("",f"おめでとーｗ")#ゴールしたときの表示
+        mx, my=cx,cy
 
+    root.after(100, main_proc)
 
 
 if __name__ == "__main__":
@@ -53,7 +60,15 @@ if __name__ == "__main__":
     tori = tk.PhotoImage(file="fig/5.png")
     mx, my =1, 1
     cx, cy = mx*100+50, my*100+50
+    canvas.create_rectangle(100,100, 200, 200,fill = "pink")
     canvas.create_image(cx, cy, image=tori, tag="tori")
+    gx=random.randint(0,14)
+    gy=random.randint(0,8)
+    while maze_bg[gy][gx]==1:
+        gx=random.randint(0,15)
+        gy=random.randint(0,9)
+    canvas.create_rectangle(gx*100, gy*100, gx*100+100, gy*100+100, 
+                fill = "blue")#ゴールの場所を作製
 
     key = ""
     root.bind("<KeyPress>", key_down)
