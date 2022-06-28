@@ -22,9 +22,6 @@ def main_proc():
           "Right":[+1, 0],
           }
     #キー：押されているキーkey/値：移動幅リスト
-    #cx, cy = cx+delta[key][0], cy+delta[key][1]
-    #canvas.coords("tori", cx, cy)
-    #root.after(30, main_proc)
     try:
         if maze_bg[my+delta[key][1]][mx+delta[key][0]]==0:
             my, mx = my+delta[key][1],mx+delta[key][0]
