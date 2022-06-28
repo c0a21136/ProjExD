@@ -22,6 +22,7 @@ def main_proc():
           "Right":[+1, 0],
           }
     #キー：押されているキーkey/値：移動幅リスト
+    
     try:
         if maze_bg[my+delta[key][1]][mx+delta[key][0]]==0:
             my, mx = my+delta[key][1],mx+delta[key][0]
