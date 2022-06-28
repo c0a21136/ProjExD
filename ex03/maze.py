@@ -1,4 +1,5 @@
 import tkinter as tk
+import maze_maker as mm
 
 def key_down(event):
     global key
@@ -29,6 +30,8 @@ def main_proc():
     #canvas.coords("tori", cx, cy)
     #root.after(100, main_proc)
 
+
+
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("迷えるこうかとん")
@@ -38,6 +41,10 @@ if __name__ == "__main__":
                     bg="black"
                     )
     canvas.pack()
+    maze_bg = mm.make_maze(15, 9)
+    #print(maze_bg) １が壁　0が床
+    mm.show_maze(canvas, maze_bg) #canvasにmaze_bgを描く
+
     tori = tk.PhotoImage(file="fig/5.png")
     cx, cy = 300, 400
     canvas.create_image(cx, cy, image=tori, tag="tori")
@@ -45,5 +52,6 @@ if __name__ == "__main__":
     key = ""
     root.bind("<KeyPress>", key_down)
     root.bind("<KeyRelease>", key_up)
+
     main_proc()
     root.mainloop()
