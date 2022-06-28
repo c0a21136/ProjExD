@@ -55,11 +55,6 @@ if __name__ == "__main__":
     mm.show_maze(canvas, maze_bg) #canvasにmaze_bgを描く
     #ディスプレイ設定でプレイ時は100に変えること。
 
-    tori = tk.PhotoImage(file="fig/5.png")
-    mx, my =1, 1
-    cx, cy = mx*100+50, my*100+50
-    canvas.create_rectangle(100,100, 200, 200,fill = "pink")
-    canvas.create_image(cx, cy, image=tori, tag="tori")
     gx=random.randint(0,14)
     gy=random.randint(0,8)
     while maze_bg[gy][gx]==1:
@@ -67,6 +62,13 @@ if __name__ == "__main__":
         gy=random.randint(0,9)
     canvas.create_rectangle(gx*100, gy*100, gx*100+100, gy*100+100, 
                 fill = "blue")#ゴールの場所を作製
+
+    tori = tk.PhotoImage(file="fig/5.png")
+    mx, my =1, 1
+    cx, cy = mx*100+50, my*100+50
+    canvas.create_rectangle(100,100, 200, 200,fill = "pink")
+    canvas.create_image(cx, cy, image=tori, tag="tori")
+    
 
     key = ""
     root.bind("<KeyPress>", key_down)
