@@ -3,7 +3,31 @@ import tkinter as tk
 def key_down(event):
     global key
     key = event.keysym
-    print("push")
+    #print("push")
+
+def key_up(event):
+    global key
+    key = ""
+
+def main_proc():
+    global cx, cy
+    delta = {
+            "":[0, 0],
+            "Up":[0,-20],
+            "Down":[0, +20],
+            "Left":[-20, 0],
+            "Right":[+20, 0]}
+    #キー：押されているキーkey/値：移動幅リスト
+    cx, cy = cx+delta[key][0], cy+delta[key][1]
+    canvas.coords("tori", cx, cy)
+    root.after(30, main_proc)
+
+    #if key == "UP": cy -= 20
+    #if key == "Down": cy += 20
+    #if key == "Left": cx -= 20
+    #if key == "Right": cx += 20
+    #canvas.coords("tori", cx, cy)
+    #root.after(100, main_proc)
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -20,4 +44,6 @@ if __name__ == "__main__":
 
     key = ""
     root.bind("<KeyPress>", key_down)
+    root.bind("<KeyRelease>", key_up)
+    main_proc()
     root.mainloop()
