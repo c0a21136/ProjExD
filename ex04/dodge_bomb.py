@@ -98,7 +98,6 @@ def main():
         #追加(四角いの)
         screen_sfc.blit(bmimg_sfc3, bmimg_rect3) 
         #練習７
-        
         yoko, tate =check_bound(bmimg_rect, screen_rect)
         vx *= yoko
         vy *= tate
