@@ -1,6 +1,7 @@
 import pygame as pg
 import sys
 import random
+import tkinter.messagebox as tkm
 
 def main():
 
@@ -26,6 +27,22 @@ def main():
     bmimg_rect.centerx = random.randint(0, screen_rect.width)
     bmimg_rect.centery = random.randint(0, screen_rect.height)
     vx, vy = +1, +1 #練習６
+    #追加機能玉２
+    bmimg_sfc2 = pg.Surface((50, 50)) #Surface
+    bmimg_sfc2.set_colorkey((0, 0, 0))
+    pg.draw.circle(bmimg_sfc2, (0, 50, 0),(25, 25), 25)
+    bmimg_rect2 = bmimg_sfc2.get_rect()
+    bmimg_rect2.centerx = random.randint(20, screen_rect.width)
+    bmimg_rect2.centery = random.randint(20, screen_rect.height)
+    x, y = -1.5, +1.5
+    #追加玉(四角です)
+    bmimg_sfc3 = pg.Surface((50, 50)) #Surface
+    bmimg_sfc3.set_colorkey((0, 0, 0))
+    pg.draw.circle(bmimg_sfc3, (0, 0, 255),(25, 25), 25)
+    bmimg_rect3 = bmimg_sfc3.get_rect()
+    bmimg_rect3.centerx = random.randint(10, screen_rect.width)
+    bmimg_rect3.centery = random.randint(10, screen_rect.height)
+    xx, yy = +3, -3
 
     while True:
         screen_sfc.blit(bgimg_sfc, bgimg_rect)
@@ -43,6 +60,18 @@ def main():
             kkimg_rect.centerx -= 1
         if key_states[pg.K_RIGHT] == True:
             kkimg_rect.centerx += 1
+        if key_states[pg.K_w] == True:#wが押されると上へ通常の二倍で動く
+            kkimg_rect.centery -= 3
+        if key_states[pg.K_s] == True:#sが押されると下へ通常の二倍で動く
+            kkimg_rect.centery += 3
+        if key_states[pg.K_a] == True:#aが押されると左へ通常の二倍で動く
+            kkimg_rect.centerx -= 3
+        if key_states[pg.K_d] == True:#dが押されると右へ通常の二倍で動く
+            kkimg_rect.centerx += 3
+        if key_states[pg.K_j] == True:
+            kkimg_rect.centerx = 800
+        if key_states[pg.K_j] == True:#ワープ機能
+            kkimg_rect.centery = 800
         if check_bound(kkimg_rect, screen_rect) != (1,1):#領域外だったら
             if key_states[pg.K_UP] == True:
                 kkimg_rect.centery += 1 #key Upが押されてたらy座標-1
@@ -56,14 +85,35 @@ def main():
 
         #練習６
         bmimg_rect.move_ip(vx, vy)
+        #追加玉２
+        bmimg_rect2.move_ip(x,y)
+        #追加(四角いの)
+        bmimg_rect3.move_ip(xx,yy)
         #練習5
-        screen_sfc.blit(bmimg_sfc, bmimg_rect) 
+        screen_sfc.blit(bmimg_sfc, bmimg_rect)
+        #追加玉２
+        screen_sfc.blit(bmimg_sfc2, bmimg_rect2)
+        #追加(四角いの)
+        screen_sfc.blit(bmimg_sfc3, bmimg_rect3) 
         #練習７
         yoko, tate =check_bound(bmimg_rect, screen_rect)
         vx *= yoko
         vy *= tate
+        yoko, tate =check_bound(bmimg_rect2, screen_rect)
+        x *= yoko
+        y *= tate
+        yoko, tate =check_bound(bmimg_rect3, screen_rect)
+        xx *= yoko
+        yy *= tate
         #練習８
         if kkimg_rect.colliderect(bmimg_rect):
+            tkm.showwarning("dead","あなたは玉に押しつぶされました")#ぶつかると表示される
+            return
+        if kkimg_rect.colliderect(bmimg_rect2):
+            tkm.showwarning("dead","あなたはでっかい玉に押しつぶされました")#ぶつかると表示される
+            return
+        if kkimg_rect.colliderect(bmimg_rect3):
+            tkm.showwarning("dead","あなたは速い玉に押しつぶされました")#ぶつかると表示される
             return
 
         pg.display.update()
