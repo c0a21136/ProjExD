@@ -12,6 +12,7 @@ def main():
     bgimg_rect = bgimg_sfc.get_rect()               #Rect
     screen_sfc.blit(bgimg_sfc, bgimg_rect)
     #pg.display.update()　#試し
+    #練習3
     kkimg_sfc = pg.image.load("fig/6.png")          #Surface
     kkimg_sfc =pg.transform.rotozoom(kkimg_sfc, 0, 2.0) #Surface
     kkimg_rect = kkimg_sfc.get_rect()               #Rect
@@ -19,11 +20,23 @@ def main():
 
     while True:
         screen_sfc.blit(bgimg_sfc, bgimg_rect)
-        screen_sfc.blit(kkimg_sfc, kkimg_rect)
         #練習2
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return #xが押されたらmain関数return
+        #練習4
+        key_states = pg.key.get_pressed() #辞書
+        if key_states[pg.K_UP] == True:
+            kkimg_rect.centery -= 1 #key Upが押されてたらy座標-1
+        if key_states[pg.K_DOWN] == True:
+            kkimg_rect.centery +=1
+        if key_states[pg.K_LEFT] == True:
+            kkimg_rect.centerx -= 1
+        if key_states[pg.K_RIGHT] == True:
+            kkimg_rect.centerx += 1
+        screen_sfc.blit(kkimg_sfc, kkimg_rect)
+          
+
         pg.display.update()
         clock.tick(1000)
 
