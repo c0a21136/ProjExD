@@ -43,15 +43,39 @@ def main():
             kkimg_rect.centerx -= 1
         if key_states[pg.K_RIGHT] == True:
             kkimg_rect.centerx += 1
+        if check_bound(kkimg_rect, screen_rect) != (1,1):#領域外だったら
+            if key_states[pg.K_UP] == True:
+                kkimg_rect.centery += 1 #key Upが押されてたらy座標-1
+            if key_states[pg.K_DOWN] == True:
+                kkimg_rect.centery -= 1
+            if key_states[pg.K_LEFT] == True:
+             kkimg_rect.centerx += 1
+            if key_states[pg.K_RIGHT] == True:
+                kkimg_rect.centerx -= 1
         screen_sfc.blit(kkimg_sfc, kkimg_rect)
 
         #練習６
         bmimg_rect.move_ip(vx, vy)
         #練習5
         screen_sfc.blit(bmimg_sfc, bmimg_rect) 
+        #練習７
+        yoko, tate =check_bound(bmimg_rect, screen_rect)
+        vx *= yoko
+        vy *= tate
 
         pg.display.update()
         clock.tick(1000)
+#練習7
+def check_bound(rct, scr_rct):
+    # rct:こうかとんor 爆弾のRect
+    # scr_rct:　スクリーンのRect
+    yoko, tate = +1, +1 #領域内
+    if rct.left < scr_rct.left or scr_rct.right < rct.right:
+        yoko = -1 #領域外
+    if rct.top < scr_rct.top or scr_rct.bottom < rct.bottom:
+        tate = -1 #領域外
+    return yoko, tate
+
 
 if __name__ == "__main__":
     pg.init()
