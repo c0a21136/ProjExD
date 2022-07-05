@@ -60,17 +60,19 @@ def main():
             kkimg_rect.centerx -= 1
         if key_states[pg.K_RIGHT] == True:
             kkimg_rect.centerx += 1
-        if key_states[pg.K_w] == True:#wが押されると上へ通常の二倍で動く
+        key_speeds = pg.key.get_pressed()
+        if key_speeds[pg.K_w] == True:#wが押されると上へ通常の二倍で動く
             kkimg_rect.centery -= 3
-        if key_states[pg.K_s] == True:#sが押されると下へ通常の二倍で動く
+        if key_speeds[pg.K_s] == True:#sが押されると下へ通常の二倍で動く
             kkimg_rect.centery += 3
-        if key_states[pg.K_a] == True:#aが押されると左へ通常の二倍で動く
+        if key_speeds[pg.K_a] == True:#aが押されると左へ通常の二倍で動く
             kkimg_rect.centerx -= 3
-        if key_states[pg.K_d] == True:#dが押されると右へ通常の二倍で動く
+        if key_speeds[pg.K_d] == True:#dが押されると右へ通常の二倍で動く
             kkimg_rect.centerx += 3
-        if key_states[pg.K_j] == True:
+        key_jumps = pg.key.get_pressed()
+        if key_jumps[pg.K_j] == True:
             kkimg_rect.centerx = 800
-        if key_states[pg.K_j] == True:#ワープ機能
+        if key_jumps[pg.K_j] == True:#ワープ機能
             kkimg_rect.centery = 800
         if check_bound(kkimg_rect, screen_rect) != (1,1):#領域外だったら
             if key_states[pg.K_UP] == True:
