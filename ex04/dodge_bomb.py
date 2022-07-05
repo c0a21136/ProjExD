@@ -1,6 +1,6 @@
-from re import L
 import pygame as pg
 import sys
+import random
 
 def main():
 
@@ -18,6 +18,15 @@ def main():
     kkimg_rect = kkimg_sfc.get_rect()               #Rect
     kkimg_rect.center = 900, 400
 
+    #練習５
+    bmimg_sfc = pg.Surface((20, 20)) #Surface
+    bmimg_sfc.set_colorkey((0, 0, 0))
+    pg.draw.circle(bmimg_sfc, (255, 0, 0),(10, 10), 10)
+    bmimg_rect = bmimg_sfc.get_rect()
+    bmimg_rect.centerx = random.randint(0, screen_rect.width)
+    bmimg_rect.centery = random.randint(0, screen_rect.height)
+    vx, vy = +1, +1 #練習６
+
     while True:
         screen_sfc.blit(bgimg_sfc, bgimg_rect)
         #練習2
@@ -29,13 +38,17 @@ def main():
         if key_states[pg.K_UP] == True:
             kkimg_rect.centery -= 1 #key Upが押されてたらy座標-1
         if key_states[pg.K_DOWN] == True:
-            kkimg_rect.centery +=1
+            kkimg_rect.centery += 1
         if key_states[pg.K_LEFT] == True:
             kkimg_rect.centerx -= 1
         if key_states[pg.K_RIGHT] == True:
             kkimg_rect.centerx += 1
         screen_sfc.blit(kkimg_sfc, kkimg_rect)
-          
+
+        #練習６
+        bmimg_rect.move_ip(vx, vy)
+        #練習5
+        screen_sfc.blit(bmimg_sfc, bmimg_rect) 
 
         pg.display.update()
         clock.tick(1000)
