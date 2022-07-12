@@ -53,7 +53,7 @@ class Bird:
 
 class Bomb():
     def __init__(self, color, size, vxy, scr: Screen):
-        self.sfc = pg.Surface((2*size, 2*size)) #Surface
+        self.sfc = pg.Surface((3*size, 3*size)) #Surface
         self.sfc.set_colorkey((0, 0, 0))
         pg.draw.circle(self.sfc, color, (size, size), size)
         self.rct = self.sfc.get_rect()
@@ -107,11 +107,11 @@ class h1():
         self.vx *= yoko
         self.vy *= tate
         
-        self.blit(scr) #上に固定されている壁を追加
+        self.blit(scr) #上に固定されている壁を追加 
 
 class h2():
     def __init__(self, size, vxy, scr: Screen):
-        self.sfc = pg.Surface((size, 10*size)) #Surface
+        self.sfc = pg.Surface((5*size, 10*size)) #Surface
         self.sfc.set_colorkey((255, 0, 0))
         self.rct = self.sfc.get_rect()
         self.rct.centery = random.randint(0, scr.rct.height)
