@@ -115,7 +115,6 @@ class h2():
         self.sfc.set_colorkey((255, 0, 0))
         self.rct = self.sfc.get_rect()
         self.rct.centery = random.randint(0, scr.rct.height)
-        self.rct.centery = random.randint(0, scr.rct.height)
         self.vx, self.vy = vxy 
 
     def blit(self, scr: Screen):
